@@ -1,6 +1,6 @@
 Author: Gavriel Shleypak
 
-Description: Tic Tac Toe game. React + Java/Spring.
+Description: Tic Tac Toe game. React/NodeJS + Java/Spring.
 
 To run the project: 
 
