@@ -11,8 +11,42 @@ class Board extends Component{
         }
     }
 
-    renderSquare(){
-        return <Square/>
+    nextTurn(){
+        if(this.state.turn === 'X'){
+            this.setState({turn: 'O'});
+        }
+        else{
+            this.setState({turn:'X'});
+        }
+    }
+
+
+    onChangeSquareStatus(x, y, squareValidMove) {
+       debugger;
+        this.props.onSquareSelected(x, y, this.state.turn, squareValidMove, this.nextTurn.bind(this));
+        ///        .then(
+        ///        (response)=>{
+        ///            if(response.validMove){
+        ///                squareValidMove(this.state.turn);
+        ///                return response;
+        ///            }else{
+        ///                throw new Error('Bad Move')
+        ///            }
+        ///        }
+        ///    ).catch((e)=>{
+        ///        console.log(e.message);
+        ///    }).then((response)=>{
+        ///        this.props.isWinner(response);
+        ///    });
+    }
+
+    getTurn(){
+        return this.state.turn;
+    }
+
+    renderSquare(x, y){
+        return <Square x={x} y={y} onChangeSquareStatus={this.onChangeSquareStatus.bind(this)}
+                       getTurn={this.getTurn.bind(this)}/>
     }
 
     render(){
@@ -20,19 +54,19 @@ class Board extends Component{
             <div>
                 <div className={"status"}>{"Next Player is:" + this.state.turn}</div>
                 <div className={"boardRow"}>
-                    {this.renderSquare()}
-                    {this.renderSquare()}
-                    {this.renderSquare()}
+                    {this.renderSquare(0,0)}
+                    {this.renderSquare(0,1)}
+                    {this.renderSquare(0,2)}
                 </div>
                 <div className={"boardRow"}>
-                    {this.renderSquare()}
-                    {this.renderSquare()}
-                    {this.renderSquare()}
+                    {this.renderSquare(1,0)}
+                    {this.renderSquare(1,1)}
+                    {this.renderSquare(1,2)}
                 </div>
                 <div className={"boardRow"}>
-                    {this.renderSquare()}
-                    {this.renderSquare()}
-                    {this.renderSquare()}
+                    {this.renderSquare(2,0)}
+                    {this.renderSquare(2,1)}
+                    {this.renderSquare(2,2)}
                 </div>
             </div>
             )
